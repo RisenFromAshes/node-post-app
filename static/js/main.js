@@ -31,7 +31,7 @@ var getPost = (postData)=>{
                         row1,hr, row2
                     );
     var card = $("<div></div>")
-                .addClass("card bg-light my-4")
+                .addClass("postcard card bg-light my-4")
                 .append(
                     cardbody
                 );
@@ -72,6 +72,7 @@ var renderPost = postData=>{
 };
 
 var renderPrePosts = ()=>{
+    $("*").remove('.postcard');
     getRequest(posts=>{
         posts.forEach(post => {
             renderPost(post);
@@ -99,6 +100,20 @@ var getRequest = (callback)=>{
         },
         "json"
     );
+};
+
+var checkUpdate = ()=>{
+    setInterval(()=>{
+            $.get("/update", 'pending update',
+            function (data) {
+                console.log(data);
+                if(data == 'true'){
+                    renderPrePosts();
+                }
+            },
+            "text"
+        );
+    },1000);
 };
 
 

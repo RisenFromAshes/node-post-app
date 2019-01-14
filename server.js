@@ -6,6 +6,8 @@ const port = process.env.PORT || 3000;
 
 var app = express();
 
+var updateRequired = false;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,7 +25,8 @@ app.post('/jsonData', (req,res)=>{
             jsonData = JSON.parse(data);
             jsonData.push(req.body);
             fs.writeFile('./res/jsonData.json', JSON.stringify(jsonData), ()=>{
-                res.send('success');
+                res.send('success');                
+                updateRequired = true; 
             });
         }         
     });
@@ -32,9 +35,20 @@ app.get('/jsonData', (req,res)=>{
     fs.readFile('./res/jsonData.json', function(err, data) {
         if(err) res.send('error');
         else{
-            res.send(data);
+            res.send(data);           
         }       
     });
+});
+
+app.get('/update',(req,res)=>{
+    if(updateRequired){
+        res.send('true');
+        updateRequired = false;
+        console.log('Update advised');
+    }
+    else {        
+        res.send('false');
+    }        
 });
 
 app.listen(port, () => {
