@@ -68,11 +68,11 @@ var newDataInput = ()=>{
 };
 
 var renderPost = postData=>{
-    $("#mainTab").append(getPost(postData));
+    $("#postContainer").after(getPost(postData));
 };
 
 var renderPrePosts = ()=>{
-    $("*").remove('.postcard');
+    $('.postcard').fadeOut().remove();
     getRequest(posts=>{
         posts.forEach(post => {
             renderPost(post);
