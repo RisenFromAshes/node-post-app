@@ -1,3 +1,5 @@
+
+
 .nav-item{
     height: 100%;
     font-size: 20px;
@@ -49,7 +51,7 @@ footer {
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
-    html {font-size: 0.9rem;}}
+    html {font-size: 0.9rem;}
   } 
   
   /* Large devices (laptops/desktops, 992px and up) */
