@@ -1,4 +1,4 @@
-
+var id = Math.floor(Math.random()*1000000000);
 
 var getPost = (postData)=>{
     var userh6 = $("<h6></h6>")
@@ -83,7 +83,7 @@ var renderPrePosts = ()=>{
 var sendRequest = (object)=>{
     $.ajax({
         type: "POST",
-        url: "/jsonData",
+        url: "/jsonData/user" + id,
         data: JSON.stringify(object),
         contentType : "application/json; charset=UTF-8",
         success: function (response) {
@@ -93,7 +93,7 @@ var sendRequest = (object)=>{
 };
 
 var getRequest = (callback)=>{
-    $.get("/jsonData", 'requesting json',
+    $.get("/jsonData/user" + id, 'requesting json',
         function (data) {
             console.log('Successfully fetched json data');
             callback(data);
@@ -104,7 +104,7 @@ var getRequest = (callback)=>{
 
 var checkUpdate = ()=>{
     setInterval(()=>{
-            $.get("/update", 'pending update',
+            $.get("/update/user"+id, 'pending update',
             function (data) {
                 console.log(data);
                 if(data == 'true'){
